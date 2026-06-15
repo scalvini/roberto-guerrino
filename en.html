@@ -385,7 +385,7 @@
       var msg = (msgEl.value||"").trim();
       if(!msg){ statusEl.textContent = "Please write a memory before sending."; msgEl.focus(); return; }
       var subject = name ? ("Roberto \u2014 " + name) : "Roberto";
-      var body = msg + "\n\n\u2014 " + (name || "Anonymous");
+      var body = msg + "\n\n\u2014 " + (name || "Anonymous") + "\n\nRicordo inviato dal sito robertoguerrino.life";
       var href = "mailto:" + MAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       statusEl.textContent = "Your mail app is opening to send the memory. Thank you.";
       window.location.href = href;
