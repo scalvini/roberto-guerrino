@@ -340,7 +340,7 @@
     <div class="grid">
       <div class="label"><span class="num">09</span><span class="name">Lascia un ricordo</span></div>
       <div class="body">
-        <p>Se hai conosciuto Roberto, puoi lasciare un pensiero. I ricordi raccolti qui restano visibili a chi visita questa pagina.</p>
+        <p>Se hai conosciuto Roberto, puoi lasciare un pensiero. Lo riceveremo con cura e potremo condividerlo su questo sito.</p>
         <div class="gb-form">
           <div class="field-name">
             <label for="gb-name">Nome</label>
@@ -351,12 +351,11 @@
             <textarea id="gb-msg" maxlength="1500" placeholder="Scrivi qui"></textarea>
           </div>
           <div class="gb-actions">
-            <button class="submit" id="gb-submit">Pubblica il ricordo</button>
-            <span class="gb-hint">Visibile pubblicamente su questa pagina.</span>
+            <button class="submit" id="gb-submit">Invia il ricordo</button>
+            <span class="gb-hint">Si aprirà la tua email, con oggetto "Roberto", pronta da inviare.</span>
           </div>
           <div class="gb-status" id="gb-status" role="status" aria-live="polite"></div>
         </div>
-        <div class="entries" id="gb-entries"></div>
       </div>
     </div>
   </section>
@@ -378,87 +377,22 @@
 
 <script>
   (function(){
-    var KEY_PREFIX = "ricordo:";
+    var MAIL = "scalvini@gmail.com";
     var statusEl = document.getElementById("gb-status");
-    var entriesEl = document.getElementById("gb-entries");
     var nameEl = document.getElementById("gb-name");
     var msgEl = document.getElementById("gb-msg");
     var btn = document.getElementById("gb-submit");
-
-    var hasStore = (typeof window !== "undefined" && window.storage && typeof window.storage.list === "function");
-
-    function fmtDate(ts){
-      try{ return new Date(ts).toLocaleDateString("it-IT",{day:"2-digit",month:"long",year:"numeric"}); }
-      catch(e){ return ""; }
-    }
-    function esc(s){
-      return String(s).replace(/[&<>"']/g,function(c){
-        return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
-      });
-    }
-    function render(list){
-      entriesEl.innerHTML = "";
-      if(!list || !list.length){
-        var e = document.createElement("div");
-        e.className = "empty";
-        e.textContent = "Ancora nessun ricordo. Puoi essere il primo.";
-        entriesEl.appendChild(e);
-        return;
-      }
-      list.sort(function(a,b){ return b.ts - a.ts; });
-      list.forEach(function(item){
-        var wrap = document.createElement("div");
-        wrap.className = "entry";
-        wrap.innerHTML =
-          '<div class="etop"><span class="who">'+esc(item.name||"Anonimo")+
-          '</span><span class="when">'+esc(fmtDate(item.ts))+'</span></div>'+
-          '<p class="msg">'+esc(item.msg||"")+'</p>';
-        entriesEl.appendChild(wrap);
-      });
-    }
-    async function load(){
-      if(!hasStore){
-        statusEl.textContent = "Anteprima. In questo ambiente i ricordi non vengono salvati in modo permanente.";
-        render([]); return;
-      }
-      try{
-        var res = await window.storage.list(KEY_PREFIX, true);
-        var keys = (res && res.keys) ? res.keys : [];
-        var items = [];
-        for(var i=0;i<keys.length;i++){
-          try{
-            var r = await window.storage.get(keys[i], true);
-            if(r && r.value){ items.push(JSON.parse(r.value)); }
-          }catch(e){}
-        }
-        render(items);
-      }catch(e){ render([]); }
-    }
-    async function submit(){
+    function submit(){
       var name = (nameEl.value||"").trim();
       var msg = (msgEl.value||"").trim();
-      if(!msg){ statusEl.textContent = "Scrivi un ricordo prima di pubblicare."; msgEl.focus(); return; }
-      if(!name){ name = "Anonimo"; }
-      var entry = { name:name, msg:msg, ts:Date.now() };
-      btn.disabled = true;
-      statusEl.textContent = "Pubblicazione in corso.";
-      if(!hasStore){
-        statusEl.textContent = "Anteprima. Il ricordo non viene salvato in questo ambiente.";
-        btn.disabled = false; return;
-      }
-      try{
-        var key = KEY_PREFIX + entry.ts + "-" + Math.random().toString(36).slice(2,8);
-        var saved = await window.storage.set(key, JSON.stringify(entry), true);
-        if(!saved){ throw new Error("save failed"); }
-        msgEl.value = "";
-        statusEl.textContent = "Grazie. Il tuo ricordo è stato pubblicato.";
-        await load();
-      }catch(e){
-        statusEl.textContent = "Non è stato possibile salvare il ricordo. Riprova.";
-      }finally{ btn.disabled = false; }
+      if(!msg){ statusEl.textContent = "Scrivi un ricordo prima di inviare."; msgEl.focus(); return; }
+      var subject = name ? ("Roberto \u2014 " + name) : "Roberto";
+      var body = msg + "\n\n\u2014 " + (name || "Anonimo");
+      var href = "mailto:" + MAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      statusEl.textContent = "Si apre la tua app di posta per inviare il ricordo. Grazie.";
+      window.location.href = href;
     }
     btn.addEventListener("click", submit);
-    load();
   })();
 </script>
 
