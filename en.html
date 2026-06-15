@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roberto Pietro Guerrino</title>
+<style>
+  :root{
+    --ink:#000000;
+    --paper:#ffffff;
+    --grey:#666666;
+    --line:#000000;
+    --faint:#e6e6e6;
+    --gutter:24px;
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;
+    font-feature-settings:"kern" 1;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter);}
+
+  .label{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;line-height:1.3;}
+  .label .num{display:block;color:var(--ink);}
+  .label .name{display:block;color:var(--grey);margin-top:4px;}
+
+  .langnav{display:flex;gap:9px;align-items:baseline;}
+  .langnav a,.langnav span{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;}
+  .langnav .cur{color:var(--ink);}
+  .langnav a{color:var(--grey);border-bottom:none;}
+  .langnav a:hover{color:var(--ink);}
+  .langnav .sep{color:#bcbcbc;}
+
+  section{border-top:1px solid var(--line);}
+  .grid{
+    display:grid;grid-template-columns:minmax(120px,2fr) 9fr;gap:var(--gutter);
+    padding:48px 0 64px;
+  }
+  .grid > .body{max-width:64ch;}
+
+  p{margin:0 0 18px;font-size:17px;}
+  p:last-child{margin-bottom:0;}
+  .lede{font-size:21px;line-height:1.42;}
+  .litline{font-style:italic;color:var(--ink);font-size:18px;margin:0 0 22px;}
+
+  a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);}
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+    outline:2px solid var(--ink);outline-offset:2px;
+  }
+
+  /* COVER */
+  .cover{border-top:none;padding:40px 0 0;}
+  .cover .topbar{display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px solid var(--line);padding-bottom:12px;gap:16px;flex-wrap:wrap;}
+
+  .namelock{padding:8vw 0 6vw;}
+  .namelock h1{
+    margin:0;font-weight:700;letter-spacing:-0.02em;line-height:0.94;
+    font-size:clamp(44px,12vw,148px);
+  }
+  .namelock h1 span{display:block;}
+  .namelock .meta{
+    display:grid;grid-template-columns:minmax(120px,2fr) 9fr;gap:var(--gutter);
+    margin-top:40px;border-top:1px solid var(--line);padding-top:16px;
+  }
+  .namelock .meta .dates{font-size:clamp(20px,3.4vw,30px);font-weight:700;letter-spacing:0.02em;}
+  .namelock .meta .role{font-size:15px;color:var(--grey);max-width:46ch;}
+  .namelock .meta .role b{color:var(--ink);font-weight:700;}
+
+  /* EPIGRAPH */
+  .epigraph{border-top:1px solid var(--line);}
+  .epigraph .grid{padding:56px 0 64px;}
+  .epigraph blockquote{
+    margin:0;font-size:clamp(23px,3.6vw,38px);line-height:1.2;font-weight:400;
+    letter-spacing:-0.01em;max-width:24ch;
+  }
+  .epigraph cite{display:block;margin-top:22px;font-style:normal;
+    font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey);}
+  .epigraph .gloss{margin-top:28px;font-size:16px;color:var(--ink);max-width:54ch;}
+
+  /* QUOTES */
+  .quotes{display:grid;grid-template-columns:1fr;gap:0;}
+  .quotes .q{border-top:1px solid var(--faint);padding:26px 0;}
+  .quotes .q:first-child{border-top:none;padding-top:0;}
+  .quotes .q:last-child{padding-bottom:0;}
+  .quotes .q blockquote{margin:0;font-size:22px;line-height:1.3;}
+  .quotes .q .src{margin-top:10px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey);}
+
+  /* PANTHEON */
+  .pantheon{display:grid;grid-template-columns:repeat(2,1fr);gap:0 var(--gutter);margin-top:6px;}
+  .pantheon .item{border-top:1px solid var(--faint);padding:16px 0;}
+  .pantheon .item:nth-child(1),.pantheon .item:nth-child(2){border-top:none;}
+  .pantheon .item .who{font-weight:700;font-size:16px;}
+  .pantheon .item .what{font-size:14px;color:var(--grey);margin-top:3px;}
+
+  /* TIMELINE */
+  .tl{display:grid;grid-template-columns:1fr;}
+  .tl .row{display:grid;grid-template-columns:minmax(80px,1fr) 6fr;gap:var(--gutter);
+    padding:18px 0;border-top:1px solid var(--faint);}
+  .tl .row:first-child{border-top:none;}
+  .tl .yr{font-weight:700;font-size:18px;letter-spacing:0.01em;}
+  .tl .ev{font-size:16px;max-width:56ch;}
+  .tl .ev b{font-weight:700;}
+
+  /* GALLERY */
+  .note{font-size:13px;color:var(--grey);margin:0 0 22px;}
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .frame{aspect-ratio:3/4;border:1px solid var(--line);position:relative;
+    background:repeating-linear-gradient(45deg,transparent,transparent 11px,var(--faint) 11px,var(--faint) 12px);}
+  .frame span{position:absolute;left:8px;bottom:8px;font-size:10px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--grey);background:var(--paper);padding:2px 4px;}
+
+  /* GUESTBOOK */
+  .gb-form{display:grid;grid-template-columns:1fr;gap:14px;max-width:60ch;margin-bottom:8px;}
+  .gb-form label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;}
+  .gb-form input,.gb-form textarea{width:100%;font-family:inherit;font-size:16px;color:var(--ink);
+    background:var(--paper);border:1px solid var(--line);border-radius:0;padding:12px;line-height:1.4;}
+  .gb-form textarea{min-height:120px;resize:vertical;}
+  .gb-form .field-name{max-width:32ch;}
+  .gb-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  button.submit{font-family:inherit;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--paper);background:var(--ink);border:1px solid var(--ink);border-radius:0;padding:13px 22px;cursor:pointer;}
+  button.submit:hover{background:var(--paper);color:var(--ink);}
+  button.submit[disabled]{opacity:0.4;cursor:default;}
+  .gb-hint{font-size:12px;color:var(--grey);max-width:52ch;}
+  .gb-status{font-size:13px;color:var(--grey);min-height:1.2em;margin-top:4px;}
+  .entries{margin-top:40px;border-top:1px solid var(--line);}
+  .entry{border-bottom:1px solid var(--faint);padding:22px 0;}
+  .entry .etop{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap;}
+  .entry .who{font-weight:700;font-size:15px;}
+  .entry .when{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);}
+  .entry .msg{margin:8px 0 0;font-size:16px;white-space:pre-wrap;max-width:64ch;}
+  .entries .empty{padding:22px 0;color:var(--grey);font-size:15px;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);}
+  footer .grid{padding:40px 0 64px;}
+  footer .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;letter-spacing:0.06em;color:var(--grey);}
+  footer .foot b{color:var(--ink);font-weight:700;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .fade{opacity:0;transform:translateY(8px);animation:rise .7s ease forwards;}
+    .fade.d1{animation-delay:.05s;}
+    .fade.d2{animation-delay:.15s;}
+    @keyframes rise{to{opacity:1;transform:none;}}
+  }
+
+  @media (max-width:760px){
+    .grid{grid-template-columns:1fr;gap:14px;padding:34px 0 44px;}
+    .namelock .meta{grid-template-columns:1fr;}
+    .tl .row{grid-template-columns:1fr;gap:4px;}
+    .gallery{grid-template-columns:repeat(2,1fr);}
+    .pantheon{grid-template-columns:1fr;}
+    .pantheon .item:nth-child(2){border-top:1px solid var(--faint);}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="topbar">
+      <div class="label"><span class="num">In memoriam</span></div>
+      <nav class="langnav" aria-label="Language">
+        <a href="index.html">Italiano</a>
+        <span class="sep">·</span>
+        <span class="cur">English</span>
+      </nav>
+    </div>
+    <div class="namelock">
+      <h1 class="fade d1"><span>Roberto</span><span>Pietro</span><span>Guerrino</span></h1>
+      <div class="meta fade d2">
+        <div class="dates">1965&nbsp;&nbsp;·&nbsp;&nbsp;2026</div>
+        <div class="role"><b>Conference interpreter.</b> A life spent among the languages of others and the silence of Buddhism.</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- EPIGRAPH -->
+  <section class="epigraph">
+    <div class="grid">
+      <div class="label"><span class="num">00</span><span class="name">Epigraph</span></div>
+      <div class="body">
+        <blockquote>We are truly like reeds in the wind. We are reeds, and fate is the wind.</blockquote>
+        <cite>Grazia Deledda, Reeds in the Wind, 1913</cite>
+        <p class="gloss">It was the image Roberto loved most, and made his own with a small consoling variation. Reeds that, so as not to be broken, lean on one another.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO HE WAS -->
+  <section>
+    <div class="grid">
+      <div class="label"><span class="num">01</span><span class="name">Who he was</span></div>
+      <div class="body">
+        <p class="lede">Roberto Pietro Guerrino was born on 13 July 1966. His craft was to lend his voice to that of others. A conference interpreter, he rendered heads of state and international audiences in real time, in that suspended zone where a stranger's words must become, in an instant, one's own without betraying them.</p>
+        <p>Of Ligurian roots, close to his mother and to that stretch of sea between Genoa and the rocks, he lived in Milan. He was a man of culture and of theatre, able to make a small story of any scene. He had an ironic elegance, never paraded, and a tenderness that was not afraid to show itself.</p>
+        <p>He graduated with honours from IULM University in Milan, with a thesis on Fernanda Pivano and American literature in Italy, and went on to study at Tor Vergata University in Rome and at New York University.</p>
+        <p>He joined two worlds that rarely coexist. On one side the worldliness of his gaze, attentive to people and their gestures. On the other a deep inner life, Buddhist in nature, made of silence and discipline. Those who knew him remember the quick intelligence and the kindness.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDDHISM -->
+  <section>
+    <div class="grid">
+      <div class="label"><span class="num">02</span><span class="name">The Buddhist silence</span></div>
+      <div class="body">
+        <p class="litline">"The garden of the Buddha."</p>
+        <p>Tibetan Buddhism was the hidden centre of his life. He had taken the dharma name <b>Konchog</b> and attended retreats at the Lama Tzong Khapa Institute in Pomaia, where he celebrated Losar, the Tibetan New Year. From that practice he drew a way of being in the world, able to accept what comes without struggling in vain.</p>
+        <p>He said it with disarming simplicity, even before the hardest trials. "As a Buddhist, I accept." In that surrender there was no resignation, but a form of freedom.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section>
+    <div class="grid">
+      <div class="label"><span class="num">03</span><span class="name">The languages of others</span></div>
+      <div class="body">
+        <p>A conference interpreter, member of <b>AIIC</b> and <b>AITI</b>, he worked in the most demanding settings, between Milan, Rome, Nice, Montreux, Ravello and Amsterdam. He knew the invisible effort of the booth, where one chases another's thought at the speed of speech, and the discipline of grammar, which he loved as one loves a living thing.</p>
+        <p>Over his career he lent his voice to some of the leading figures of world politics and diplomacy, from King Charles III to Presidents Mattarella and Napolitano, and on to Mario Draghi, Mario Monti, Henry Kissinger and Bill Clinton.</p>
+        <p>Yet he could also tell the human comedy of conferences with a writer's eye. From Montreux, once, he described a colleague in a few lines worth an entire character.</p>
+        <p class="litline">"A French interpreter from Nice, old, ultra-chic, utterly original, with a fabulous American accent. Enormous Dior sunglasses and, of course, vertiginous heels. From the next booth came oriental scents."</p>
+        <p>That was his gift, turning even a corridor of translators into literature.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANTHEON -->
+  <section>
+    <div class="grid">
+      <div class="label"><span class="num">04</span><span class="name">His pantheon</span></div>
+      <div class="body">
+        <p>He loved literature and theatre, and a certain cultured and eccentric Italy. These were among the figures dear to him.</p>
+        <div class="pantheon">
+          <div class="item"><div class="who">Grazia Deledda</div><div class="what">The reed in the wind, fragility that endures.</div></div>
+          <div class="item"><div class="who">Fernanda Pivano</div><div class="what">A love of the word and of borderline worlds.</div></div>
+          <div class="item"><div class="who">Paolo Poli</div><div class="what">Theatre as grace and freedom.</div></div>
+          <div class="item"><div class="who">Laura Betti</div><div class="what">The voice and body of the Italian stage.</div></div>
+          <div class="item"><div class="who">Marlene Dietrich</div><div class="what">The myth and elegance as a mask.</div></div>
+          <div class="item"><div class="who">Franca Sozzani</div><div class="what">An eye for beauty and for style.</div></div>
+        </div>
+        <p style="margin-top:22px;">He cultivated a sensitivity to the beauty of details and to scents. He kept a vegetarian and vegan table, out of respect for living beings, in keeping with his Buddhist ethics.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIS VOICE -->
+  <section>
+    <div class="grid">
+      <div class="label"><span class="num">05</span><span class="name">His voice</span></div>
+      <div class="body">
+        <div class="quotes">
+          <div class="q">
+            <blockquote>"Le canne al vento, che per non essere abbattute si adagiano le une sulle altre."</blockquote>
+            <div class="src">His variation on Grazia Deledda. Reeds in the wind, leaning on one another so as not to be broken.</div>
+          </div>
+          <div class="q">
+            <blockquote>"Da buddhista accetto."</blockquote>
+            <div class="src">Before life's trials. As a Buddhist, I accept.</div>
+          </div>
+          <div class="q">
+            <blockquote>"Giardino del Buddha."</blockquote>
+            <div class="src">One line, his whole way of seeing. The garden of the Buddha.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHRONOLOGY -->
+  <section>
+    <div class="grid">
+      <div class="label"><span class="num">06</span><span class="name">A brief chronology</span></div>
+      <div class="body">
+        <div class="tl">
+          <div class="row"><div class="yr">1965</div><div class="ev">Born on <b>13 July</b>. Ligurian roots, between Genoa and the sea.</div></div>
+          <div class="row"><div class="yr">·</div><div class="ev">The vocation of languages. A <b>conference interpreter</b>, member of AIIC and AITI, across Italy and Europe.</div></div>
+          <div class="row"><div class="yr">2007</div><div class="ev">Buddhist retreats in <b>Pomaia</b>, among the stupa and the prayer wheel.</div></div>
+          <div class="row"><div class="yr">2010</div><div class="ev">From <b>Montreux</b>, Deledda's image of reeds in the wind.</div></div>
+          <div class="row"><div class="yr">·</div><div class="ev">The Milan years, between work and the search for inner quiet.</div></div>
+          <div class="row"><div class="yr">2026</div><div class="ev">He died in <b>Milan</b>, on 13 June.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section>
+    <div class="grid">
+      <div class="label"><span class="num">07</span><span class="name">Gallery</span></div>
+      <div class="body">
+        <p class="note">Space for photographs, to be added. The frames below show the intended layout.</p>
+        <div class="gallery">
+          <div class="frame"><span>Portrait</span></div>
+          <div class="frame"><span>Pomaia, 2007</span></div>
+          <div class="frame"><span>Liguria</span></div>
+          <div class="frame"><span>At work</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUESTBOOK -->
+  <section>
+    <div class="grid">
+      <div class="label"><span class="num">08</span><span class="name">Leave a memory</span></div>
+      <div class="body">
+        <p>If you knew Roberto, you can leave a thought. The memories gathered here remain visible to anyone who visits this page.</p>
+        <div class="gb-form">
+          <div class="field-name">
+            <label for="gb-name">Name</label>
+            <input id="gb-name" type="text" maxlength="80" autocomplete="name" placeholder="Your name">
+          </div>
+          <div>
+            <label for="gb-msg">Your memory</label>
+            <textarea id="gb-msg" maxlength="1500" placeholder="Write here"></textarea>
+          </div>
+          <div class="gb-actions">
+            <button class="submit" id="gb-submit">Publish memory</button>
+            <span class="gb-hint">Publicly visible on this page.</span>
+          </div>
+          <div class="gb-status" id="gb-status" role="status" aria-live="polite"></div>
+        </div>
+        <div class="entries" id="gb-entries"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="grid">
+      <div class="label"><span class="num">09</span><span class="name">Colophon</span></div>
+      <div class="body">
+        <div class="foot">
+          <span><b>Roberto Pietro Guerrino</b> · 1966 · 2026</span>
+          <span>In memoriam · Milan</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var KEY_PREFIX = "ricordo:";
+    var statusEl = document.getElementById("gb-status");
+    var entriesEl = document.getElementById("gb-entries");
+    var nameEl = document.getElementById("gb-name");
+    var msgEl = document.getElementById("gb-msg");
+    var btn = document.getElementById("gb-submit");
+
+    var hasStore = (typeof window !== "undefined" && window.storage && typeof window.storage.list === "function");
+
+    function fmtDate(ts){
+      try{ return new Date(ts).toLocaleDateString("en-GB",{day:"2-digit",month:"long",year:"numeric"}); }
+      catch(e){ return ""; }
+    }
+    function esc(s){
+      return String(s).replace(/[&<>"']/g,function(c){
+        return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+      });
+    }
+    function render(list){
+      entriesEl.innerHTML = "";
+      if(!list || !list.length){
+        var e = document.createElement("div");
+        e.className = "empty";
+        e.textContent = "No memories yet. You can be the first.";
+        entriesEl.appendChild(e);
+        return;
+      }
+      list.sort(function(a,b){ return b.ts - a.ts; });
+      list.forEach(function(item){
+        var wrap = document.createElement("div");
+        wrap.className = "entry";
+        wrap.innerHTML =
+          '<div class="etop"><span class="who">'+esc(item.name||"Anonymous")+
+          '</span><span class="when">'+esc(fmtDate(item.ts))+'</span></div>'+
+          '<p class="msg">'+esc(item.msg||"")+'</p>';
+        entriesEl.appendChild(wrap);
+      });
+    }
+    async function load(){
+      if(!hasStore){
+        statusEl.textContent = "Preview. In this environment memories are not saved permanently.";
+        render([]); return;
+      }
+      try{
+        var res = await window.storage.list(KEY_PREFIX, true);
+        var keys = (res && res.keys) ? res.keys : [];
+        var items = [];
+        for(var i=0;i<keys.length;i++){
+          try{
+            var r = await window.storage.get(keys[i], true);
+            if(r && r.value){ items.push(JSON.parse(r.value)); }
+          }catch(e){}
+        }
+        render(items);
+      }catch(e){ render([]); }
+    }
+    async function submit(){
+      var name = (nameEl.value||"").trim();
+      var msg = (msgEl.value||"").trim();
+      if(!msg){ statusEl.textContent = "Write a memory before publishing."; msgEl.focus(); return; }
+      if(!name){ name = "Anonymous"; }
+      var entry = { name:name, msg:msg, ts:Date.now() };
+      btn.disabled = true;
+      statusEl.textContent = "Publishing.";
+      if(!hasStore){
+        statusEl.textContent = "Preview. The memory is not saved in this environment.";
+        btn.disabled = false; return;
+      }
+      try{
+        var key = KEY_PREFIX + entry.ts + "-" + Math.random().toString(36).slice(2,8);
+        var saved = await window.storage.set(key, JSON.stringify(entry), true);
+        if(!saved){ throw new Error("save failed"); }
+        msgEl.value = "";
+        statusEl.textContent = "Thank you. Your memory has been published.";
+        await load();
+      }catch(e){
+        statusEl.textContent = "The memory could not be saved. Please try again.";
+      }finally{ btn.disabled = false; }
+    }
+    btn.addEventListener("click", submit);
+    load();
+  })();
+</script>
+
+</body>
+</html>
