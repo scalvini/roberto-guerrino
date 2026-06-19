@@ -137,6 +137,12 @@
   .frame span{position:absolute;left:8px;bottom:8px;font-size:10px;letter-spacing:0.12em;
     text-transform:uppercase;color:var(--grey);background:var(--paper);padding:2px 4px;}
 
+  /* PHOTO STRIP */
+  .photostrip{display:flex;gap:12px;overflow-x:auto;margin-top:24px;padding-bottom:10px;-webkit-overflow-scrolling:touch;}
+  .photostrip figure{margin:0;flex:0 0 auto;}
+  .photostrip img{display:block;height:300px;width:auto;border:1px solid var(--faint);}
+  .photostrip figcaption{margin-top:8px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);}
+
   /* GUESTBOOK */
   .gb-form{display:grid;grid-template-columns:1fr;gap:14px;max-width:60ch;margin-bottom:8px;}
   .gb-form label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;}
@@ -231,18 +237,30 @@
         <p class="lede">Roberto Pietro Guerrino nasce il 13 luglio 1965. Interprete di conferenza, prestava la propria voce a quella degli altri, traducendo in simultanea, dalla cabina, capi di Stato e platee internazionali.</p>
         <p>Di radici liguri, legato alla madre e al mare tra Genova e gli scogli, viveva a Milano. Era un uomo di cultura, appassionato di letteratura e teatro, di eleganza ironica e di tenerezza non nascosta, capace di unire la mondanità dello sguardo a una vita interiore di matrice buddhista. A chi lo ha incontrato resta la memoria della sua curiosità per il mondo.</p>
         <p>Dopo il diploma di interprete alla SSIT di Milano, si era laureato con lode alla IULM con una tesi su Fernanda Pivano, per poi specializzarsi in lingua e accento americano alla SPS (School of Professional Studies) della New York University.</p>
-        <figure style="margin:26px 0 0;max-width:420px;">
-          <img src="roberto-ritratto.jpg" alt="Ritratto di Roberto Guerrino" loading="lazy" style="display:block;width:100%;height:auto;border:1px solid var(--faint);">
-          <figcaption style="margin-top:8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);">Roberto.</figcaption>
-        </figure>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;max-width:560px;">
-          <figure style="margin:0;">
-            <img src="roberto-marco-2014.jpg" alt="Roberto e Marco, 2014" loading="lazy" style="display:block;width:100%;height:auto;border:1px solid var(--faint);">
-            <figcaption style="margin-top:8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);">Roberto e Marco, 2014.</figcaption>
+        <div class="photostrip">
+          <figure>
+            <img src="foto-ny-2012.jpg" alt="Roberto a New York, 2012" loading="lazy">
+            <figcaption>Roberto a New York, 2012.</figcaption>
           </figure>
-          <figure style="margin:0;">
-            <img src="roberto-ilaria.jpg" alt="Roberto e Ilaria" loading="lazy" style="display:block;width:100%;height:auto;border:1px solid var(--faint);">
-            <figcaption style="margin-top:8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);">Roberto e Ilaria.</figcaption>
+          <figure>
+            <img src="roberto-libreria.jpg" alt="Roberto tra i suoi libri" loading="lazy">
+            <figcaption>Tra i suoi libri.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-ritratto.jpg" alt="Ritratto di Roberto Guerrino" loading="lazy">
+            <figcaption>Roberto.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-mascherina.jpg" alt="Roberto con la mascherina a fantasia, durante la pandemia" loading="lazy">
+            <figcaption>La mascherina, durante la pandemia.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-marco-2014.jpg" alt="Roberto e Marco, 2014" loading="lazy">
+            <figcaption>Roberto e Marco, 2014.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-ilaria.jpg" alt="Roberto e Ilaria" loading="lazy">
+            <figcaption>Roberto e Ilaria.</figcaption>
           </figure>
         </div>
       </div>

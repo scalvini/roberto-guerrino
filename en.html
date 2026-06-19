@@ -135,6 +135,12 @@
   .frame span{position:absolute;left:8px;bottom:8px;font-size:10px;letter-spacing:0.12em;
     text-transform:uppercase;color:var(--grey);background:var(--paper);padding:2px 4px;}
 
+  /* PHOTO STRIP */
+  .photostrip{display:flex;gap:12px;overflow-x:auto;margin-top:24px;padding-bottom:10px;-webkit-overflow-scrolling:touch;}
+  .photostrip figure{margin:0;flex:0 0 auto;}
+  .photostrip img{display:block;height:300px;width:auto;border:1px solid var(--faint);}
+  .photostrip figcaption{margin-top:8px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);}
+
   /* GUESTBOOK */
   .gb-form{display:grid;grid-template-columns:1fr;gap:14px;max-width:60ch;margin-bottom:8px;}
   .gb-form label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;}
@@ -229,18 +235,30 @@
         <p class="lede">Roberto Pietro Guerrino was born on 13 July 1965. A conference interpreter, he lent his voice to that of others, interpreting heads of state and international audiences simultaneously, from the booth.</p>
         <p>Of Ligurian roots, close to his mother and to the sea between Genoa and the rocks, he lived in Milan. A man of culture, he loved literature and the theatre. He was elegant but never pompous, and openly tender. Worldly on the surface, he held a deep Buddhist inner life. Those who knew him remember his curiosity about everything around him.</p>
         <p>After a parliamentary interpreter's diploma at the school for interpreters in Milan, he graduated with honours from IULM University with a thesis on Fernanda Pivano, then specialised in American language and accent at the SPS (School of Professional Studies) of New York University.</p>
-        <figure style="margin:26px 0 0;max-width:420px;">
-          <img src="roberto-ritratto.jpg" alt="Portrait of Roberto Guerrino" loading="lazy" style="display:block;width:100%;height:auto;border:1px solid var(--faint);">
-          <figcaption style="margin-top:8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);">Roberto.</figcaption>
-        </figure>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;max-width:560px;">
-          <figure style="margin:0;">
-            <img src="roberto-marco-2014.jpg" alt="Roberto and Marco, 2014" loading="lazy" style="display:block;width:100%;height:auto;border:1px solid var(--faint);">
-            <figcaption style="margin-top:8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);">Roberto and Marco, 2014.</figcaption>
+        <div class="photostrip">
+          <figure>
+            <img src="foto-ny-2012.jpg" alt="Roberto in New York, 2012" loading="lazy">
+            <figcaption>Roberto in New York, 2012.</figcaption>
           </figure>
-          <figure style="margin:0;">
-            <img src="roberto-ilaria.jpg" alt="Roberto and Ilaria" loading="lazy" style="display:block;width:100%;height:auto;border:1px solid var(--faint);">
-            <figcaption style="margin-top:8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);">Roberto and Ilaria.</figcaption>
+          <figure>
+            <img src="roberto-libreria.jpg" alt="Roberto among his books" loading="lazy">
+            <figcaption>Among his books.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-ritratto.jpg" alt="Portrait of Roberto Guerrino" loading="lazy">
+            <figcaption>Roberto.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-mascherina.jpg" alt="Roberto with a patterned face mask, during the pandemic" loading="lazy">
+            <figcaption>The mask, during the pandemic.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-marco-2014.jpg" alt="Roberto and Marco, 2014" loading="lazy">
+            <figcaption>Roberto and Marco, 2014.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-ilaria.jpg" alt="Roberto and Ilaria" loading="lazy">
+            <figcaption>Roberto and Ilaria.</figcaption>
           </figure>
         </div>
       </div>
