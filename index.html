@@ -141,6 +141,7 @@
   .photostrip{display:flex;gap:12px;overflow-x:auto;margin-top:24px;padding-bottom:10px;-webkit-overflow-scrolling:touch;}
   .photostrip figure{margin:0;flex:0 0 auto;}
   .photostrip img{display:block;height:300px;width:auto;border:1px solid var(--faint);}
+  .photostrip video{display:block;height:300px;width:auto;border:1px solid var(--faint);background:#000;}
   .photostrip figcaption{margin-top:8px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);}
 
   /* GUESTBOOK */
@@ -239,7 +240,21 @@
         <p>Dopo il diploma di interprete alla SSIT di Milano, si era laureato con lode alla IULM con una tesi su Fernanda Pivano, per poi specializzarsi in lingua e accento americano alla SPS (School of Professional Studies) della New York University.</p>
         <div class="photostrip">
           <figure>
-            <img src="roberto-ritratto.jpg" alt="Ritratto di Roberto Guerrino" loading="lazy">
+            <video controls preload="metadata" playsinline poster="roberto-video-poster.jpg">
+              <source src="roberto-video.mp4" type="video/mp4">
+            </video>
+            <figcaption>Un saluto.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-ritratto.jpg" alt="Roberto in cabina di interpretazione" loading="lazy">
+            <figcaption>In cabina.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-mare.jpg" alt="Roberto al mare" loading="lazy">
+            <figcaption>Al mare.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-giacca.jpg" alt="Ritratto di Roberto" loading="lazy">
             <figcaption>Roberto.</figcaption>
           </figure>
           <figure>
@@ -249,6 +264,10 @@
           <figure>
             <img src="roberto-mascherina.jpg" alt="Roberto con la mascherina a fantasia, durante la pandemia" loading="lazy">
             <figcaption>La mascherina, durante la pandemia.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-casa.jpg" alt="Roberto, uno scatto a casa" loading="lazy">
+            <figcaption>A casa.</figcaption>
           </figure>
           <figure>
             <img src="roberto-ilaria.jpg" alt="Roberto e Ilaria" loading="lazy">

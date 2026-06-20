@@ -139,6 +139,7 @@
   .photostrip{display:flex;gap:12px;overflow-x:auto;margin-top:24px;padding-bottom:10px;-webkit-overflow-scrolling:touch;}
   .photostrip figure{margin:0;flex:0 0 auto;}
   .photostrip img{display:block;height:300px;width:auto;border:1px solid var(--faint);}
+  .photostrip video{display:block;height:300px;width:auto;border:1px solid var(--faint);background:#000;}
   .photostrip figcaption{margin-top:8px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);}
 
   /* GUESTBOOK */
@@ -237,7 +238,21 @@
         <p>After a parliamentary interpreter's diploma at the school for interpreters in Milan, he graduated with honours from IULM University with a thesis on Fernanda Pivano, then specialised in American language and accent at the SPS (School of Professional Studies) of New York University.</p>
         <div class="photostrip">
           <figure>
-            <img src="roberto-ritratto.jpg" alt="Portrait of Roberto Guerrino" loading="lazy">
+            <video controls preload="metadata" playsinline poster="roberto-video-poster.jpg">
+              <source src="roberto-video.mp4" type="video/mp4">
+            </video>
+            <figcaption>A wave.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-ritratto.jpg" alt="Roberto in the interpreting booth" loading="lazy">
+            <figcaption>In the booth.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-mare.jpg" alt="Roberto by the sea" loading="lazy">
+            <figcaption>By the sea.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-giacca.jpg" alt="Portrait of Roberto" loading="lazy">
             <figcaption>Roberto.</figcaption>
           </figure>
           <figure>
@@ -247,6 +262,10 @@
           <figure>
             <img src="roberto-mascherina.jpg" alt="Roberto with a patterned face mask, during the pandemic" loading="lazy">
             <figcaption>The mask, during the pandemic.</figcaption>
+          </figure>
+          <figure>
+            <img src="roberto-casa.jpg" alt="Roberto, a snapshot at home" loading="lazy">
+            <figcaption>At home.</figcaption>
           </figure>
           <figure>
             <img src="roberto-ilaria.jpg" alt="Roberto and Ilaria" loading="lazy">
